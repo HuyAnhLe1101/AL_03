@@ -1,0 +1,9 @@
+0.7
+2020.2
+Nov 14 2025
+19:37:27
+C:/Learn/AL_03/AL_03.sim/sim_1/behav/xsim/glbl.v,1756381829,verilog,,,,glbl,,uvm,,,,,,
+C:/Learn/AL_03/AL_03.srcs/sim_1/new/UART_tb.sv,1789962639,systemVerilog,,,,UART_tb,,uvm,../../../../../../Work/Vivado/2025.2/Vivado/data/rsb/busdef,,,,,
+C:/Learn/AL_03/AL_03.srcs/sources_1/new/Baud_gen.sv,1789958294,systemVerilog,,C:/Learn/AL_03/AL_03.srcs/sources_1/new/UART.sv,,Baud_gen,,uvm,../../../../../../Work/Vivado/2025.2/Vivado/data/rsb/busdef,,,,,
+C:/Learn/AL_03/AL_03.srcs/sources_1/new/UART.sv,1789958455,systemVerilog,,C:/Learn/AL_03/AL_03.srcs/sources_1/new/UARTReader.sv,,UART,,uvm,../../../../../../Work/Vivado/2025.2/Vivado/data/rsb/busdef,,,,,
+C:/Learn/AL_03/AL_03.srcs/sources_1/new/UARTReader.sv,1789959948,systemVerilog,,C:/Learn/AL_03/AL_03.srcs/sim_1/new/UART_tb.sv,,UARTReader,,uvm,../../../../../../Work/Vivado/2025.2/Vivado/data/rsb/busdef,,,,,

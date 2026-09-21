@@ -1,0 +1,3 @@
+Time resolution is 1 ps
+PASSED: total          10 transfers
+$finish called at time : 425328 ns : File "C:/Learn/AL_03/AL_03.srcs/sim_1/new/UART_tb.sv" Line 143
