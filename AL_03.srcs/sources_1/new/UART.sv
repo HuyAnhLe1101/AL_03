@@ -23,38 +23,37 @@
 module UART #(
     parameter CLK_FRE   = 10_240_000, 
     parameter BAUD_RATE = 230_400,
-    parameter DATA_WIDTH = 8, 
-    parameter OVERSAMPLE_CNT = 16 // oversampling CNT for each bit of RX 
+    parameter DATA_WIDTH = 8
+    
 )(
-    input logic clk, rst_n, 
+    input logic clk, rst_n,
+
+    // RX side 
     input logic rx, 
     output logic [DATA_WIDTH-1:0] dout, 
     output logic rx_done_tick, 
-    output logic [9:0] debug_div, 
-    output logic [1:0] debug_state,
-    output logic [3:0] debug_tick_count, 
-    output logic [2:0] debug_data_count, 
-    output logic debug_enable_tick 
-);
-    // the sampling rate for UART data is 16 times of baud rate 
-    //localparam DIV_VALUE = (CLK_FRE / (BAUD_RATE*OVERSAMPLE_CNT)) - 1;
-    localparam DIV_VALUE = 2; 
-    logic enable_tick; 
 
-    Baud_gen baud_gen_0(
-        .dvsr(DIV_VALUE), 
-        .tick(enable_tick), 
-        .*
-    ); 
+    // TX side 
+    input logic [DATA_WIDTH-1:0] din, 
+    input logic tx_send_data, 
+    output logic tx, 
+    output logic tx_done_tick, 
+
+    // debug signals 
+    output logic [1:0] debug_state,
+    output logic [4:0] debug_tick_count, 
+    output logic [2:0] debug_data_count
+
+);
+    localparam CLKS_PER_BIT = CLK_FRE / BAUD_RATE;  
 
     UARTReader #(.DATA_WIDTH(DATA_WIDTH), 
-                 .OVERSAMPLE_CNT(OVERSAMPLE_CNT)) 
-    uartreader_0(
-        .baud_tick(enable_tick), 
-        .*
-    ); 
-    
-    assign debug_div = DIV_VALUE;
-    assign debug_enable_tick = enable_tick;
+                 .CLKS_PER_BIT(CLKS_PER_BIT)) 
+    uartreader_0(.*); 
+
+    UARTTransmitter #(.DATA_WIDTH(DATA_WIDTH),
+                      .CLKS_PER_BIT(CLKS_PER_BIT))
+    uartransmitter_0(.*); 
+
 
 endmodule

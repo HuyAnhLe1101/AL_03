@@ -1,8 +1,8 @@
 # compile verilog/system verilog design source files
 sv xil_defaultlib  --include "../../../../../../Work/Vivado/2025.2/Vivado/data/rsb/busdef" \
-"../../../../AL_03.srcs/sources_1/new/Baud_gen.sv" \
 "../../../../AL_03.srcs/sources_1/new/UART.sv" \
 "../../../../AL_03.srcs/sources_1/new/UARTReader.sv" \
+"../../../../AL_03.srcs/sources_1/new/UARTTransmitter.sv" \
 "../../../../AL_03.srcs/sim_1/new/UART_tb.sv" \
 
 # compile glbl module

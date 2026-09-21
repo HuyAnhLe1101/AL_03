@@ -30,16 +30,23 @@ module UART_tb #(
     localparam CYCS_PER_BITS = CLK_FRE / BAUD_RATE; 
 
     logic clk, rst_n;  
-    logic rx = 1'b1; 
+    logic rx; 
     logic [DATA_WIDTH-1:0] dout; 
     logic rx_done_tick;
-    logic [9:0] debug_div; 
-    logic [1:0] debug_state; 
-    logic [3:0] debug_tick_count;  
-    logic [2:0] debug_data_count; 
-    logic debug_enable_tick; 
 
+    logic [DATA_WIDTH-1:0] din;  
+    logic tx_send_data;  
+    logic tx; 
+    logic tx_done_tick; 
+
+    logic [1:0] debug_state; 
+    logic [4:0] debug_tick_count;  
+    logic [2:0] debug_data_count; 
+ 
+    // DUT 
     UART uart_dut(.*); 
+
+    assign rx = tx; // Loopback setup 
 
     // ----- Testbench parameters ------------ 
     // Queue for storing UART data
@@ -108,7 +115,20 @@ module UART_tb #(
 
     endtask 
 
-    initial begin : tx_send_op
+    task automatic tx_send_uarttrans(input logic [DATA_WIDTH-1:0] data_send); 
+        deubg_data_send_tx = data_send; 
+        model.push_back(data_send); 
+
+        @(negedge clk); 
+        din = data_send; 
+        tx_send_data <= 1'b1; 
+
+        @(negedge clk) 
+        tx_send_data <= 1'b0; 
+    endtask 
+
+    // ----- TESTCASE SETUP -------
+    /*initial begin : tx_send_op
         wait (done_rst); 
 
         repeat (10) begin 
@@ -117,7 +137,19 @@ module UART_tb #(
         end 
 
         finish_tx = 1'b1; 
-    end  
+    end */
+
+    initial begin : tx_send_uarttrans_op 
+        wait (done_rst); 
+
+        repeat (10) begin 
+            tx_send_uarttrans($urandom); 
+            wait (tx_done_tick); 
+            repeat ($urandom_range(1, 3)) @(posedge clk); 
+        end 
+
+        finish_tx = 1'b1;
+    end 
 
     initial begin : rx_receive_op 
 
