@@ -6,5 +6,5 @@ C:/Learn/AL_03/AL_03.sim/sim_1/behav/xsim/glbl.v,1756381829,verilog,,,,glbl,,uvm
 C:/Learn/AL_03/AL_03.srcs/sim_1/new/UART_tb.sv,1790006629,systemVerilog,,,,UART_tb,,uvm,../../../../../../Work/Vivado/2025.2/Vivado/data/rsb/busdef,,,,,
 C:/Learn/AL_03/AL_03.srcs/sources_1/new/Baud_gen.sv,1789958294,systemVerilog,,C:/Learn/AL_03/AL_03.srcs/sources_1/new/UART.sv,,Baud_gen,,uvm,../../../../../../Work/Vivado/2025.2/Vivado/data/rsb/busdef,,,,,
 C:/Learn/AL_03/AL_03.srcs/sources_1/new/UART.sv,1790003571,systemVerilog,,C:/Learn/AL_03/AL_03.srcs/sources_1/new/UARTReader.sv,,UART,,uvm,../../../../../../Work/Vivado/2025.2/Vivado/data/rsb/busdef,,,,,
-C:/Learn/AL_03/AL_03.srcs/sources_1/new/UARTReader.sv,1790003266,systemVerilog,,C:/Learn/AL_03/AL_03.srcs/sources_1/new/UARTTransmitter.sv,,UARTReader,,uvm,../../../../../../Work/Vivado/2025.2/Vivado/data/rsb/busdef,,,,,
+C:/Learn/AL_03/AL_03.srcs/sources_1/new/UARTReader.sv,1790025510,systemVerilog,,C:/Learn/AL_03/AL_03.srcs/sources_1/new/UARTTransmitter.sv,,UARTReader,,uvm,../../../../../../Work/Vivado/2025.2/Vivado/data/rsb/busdef,,,,,
 C:/Learn/AL_03/AL_03.srcs/sources_1/new/UARTTransmitter.sv,1790005805,systemVerilog,,C:/Learn/AL_03/AL_03.srcs/sim_1/new/UART_tb.sv,,UARTTransmitter,,uvm,../../../../../../Work/Vivado/2025.2/Vivado/data/rsb/busdef,,,,,

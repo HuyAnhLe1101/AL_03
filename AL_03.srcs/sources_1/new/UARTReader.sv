@@ -43,6 +43,16 @@ module UARTReader #(
     logic [$clog2(DATA_WIDTH)-1:0] data_count_reg, next_data_count; // for counting number of data bits 
     logic [DATA_WIDTH-1:0] data_reg, next_data; 
 
+    logic rx1, rx2; 
+    // Adding data synchronizer to avoid meta-stability when reading uart data 
+    always_ff @(posedge clk, negedge rst_n) begin
+        if (!rst_n) {rx2, rx1} <= 1'b1; 
+        // Data synchronizer 
+        // rx1 <= rx; 
+        // rx2 <= rx1;   
+        else {rx2, rx1} <= {rx1, rx};  
+    end
+
     // Memory components 
     always_ff @(posedge clk, negedge rst_n) begin 
         if (!rst_n) begin 
@@ -76,7 +86,7 @@ module UARTReader #(
                 next_data_count = 0; 
                 next_data       = 0;
 
-                if (~rx) next_state = start;  
+                if (~rx2) next_state = start;  
             end 
 
             start: begin
@@ -84,7 +94,7 @@ module UARTReader #(
                 next_tick_count = tick_count_reg + 1; 
                 
                 if (tick_count_reg == CLKS_PER_BIT/2) begin // check rx again to confirm that data still high
-                    if (~rx) begin 
+                    if (~rx2) begin 
                         next_state = data; // if still low, move to next state
                         next_tick_count = 0; // reset tick count 
                     end else next_state = idle; 
@@ -95,7 +105,7 @@ module UARTReader #(
                 next_tick_count = tick_count_reg + 1; 
 
                 if (tick_count_reg == CLKS_PER_BIT-1) begin 
-                    next_data = {rx, data_reg[7:1]}; 
+                    next_data = {rx2, data_reg[7:1]}; 
                     next_data_count = data_count_reg + 1;
                     next_tick_count = 0;  
                 end 
